@@ -3,4 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="BASE_URL">http://api.wunderground.com/api/</string>
+    <string name="API_ID">0423958b78e1d1e2</string>
+    <string name="FORECAST">/conditions/forecast/alert/q/</string>
 </resources>

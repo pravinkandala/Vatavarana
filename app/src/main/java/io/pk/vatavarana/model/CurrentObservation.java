@@ -10,6 +10,15 @@ public class CurrentObservation {
     private String weather;
     private String temperature_string;
     private String humidity;
+    private String forecast_link;
+
+    public String getForecast_link() {
+        return forecast_link;
+    }
+
+    public void setForecast_link(String forecast_link) {
+        this.forecast_link = forecast_link;
+    }
 
     public String getHumidity() {
         return humidity;
