@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -15,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 import io.pk.vatavarana.R;
+import io.pk.vatavarana.service.WeatherDisplayService;
 
 import static io.pk.vatavarana.R.id.mapView;
 
@@ -72,7 +72,9 @@ public class PageTwo extends Fragment implements OnMapReadyCallback{
             @Override
             public void onMapLongClick(LatLng latLng) {
 
-                Toast.makeText(view.getContext(), "working" + latLng.longitude, Toast.LENGTH_SHORT).show();
+                WeatherDisplayService weather = new  WeatherDisplayService();
+
+                weather.displayWeatherInfoDialog(view.getContext(),latLng);
             }
         });
     }
