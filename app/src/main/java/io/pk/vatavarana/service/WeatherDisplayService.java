@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import io.pk.vatavarana.R;
 import io.pk.vatavarana.model.CurrentObservation;
-import io.pk.vatavarana.network.ServerCallback;
+import io.pk.vatavarana.network.ServerObservationCallback;
 import io.pk.vatavarana.network.WeatherSearchManager;
 import io.pk.vatavarana.util.SnackbarUtils;
 
@@ -31,7 +31,7 @@ public class WeatherDisplayService {
         view = ((Activity) context).findViewById(android.R.id.content);
 
         String url = latLng.latitude + "," + latLng.longitude;
-        WeatherSearchManager.getLocalSearchResults(context, url, new ServerCallback() {
+        WeatherSearchManager.getLocalSearchResults(context, url, new ServerObservationCallback() {
             @Override
             public void onSuccess(final CurrentObservation observation) {
 
@@ -57,7 +57,7 @@ public class WeatherDisplayService {
 
 
         String url = latLng.latitude + "," + latLng.longitude;
-        WeatherSearchManager.getLocalSearchResults(context, url, new ServerCallback() {
+        WeatherSearchManager.getLocalSearchResults(context, url, new ServerObservationCallback() {
             @Override
             public void onSuccess(final CurrentObservation observation) {
 

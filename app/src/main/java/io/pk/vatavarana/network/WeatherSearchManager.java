@@ -9,16 +9,24 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.pk.vatavarana.R;
 import io.pk.vatavarana.model.CurrentObservation;
+import io.pk.vatavarana.model.Forecast;
 
+
+//TODO: Needs attention here. IMPORTANT!!!
+//later use only one api call for both forecast and observation.
 
 public class WeatherSearchManager {
 
-    public static void getLocalSearchResults(final Context context, String location, final ServerCallback callback) {
+    public static void getLocalSearchResults(final Context context, String location, final ServerObservationCallback callback) {
 
         String finalUrl = context.getString(R.string.BASE_URL) + context.getString(R.string.API_ID) + context.getString(R.string.FORECAST) + location + ".json";
 
@@ -63,6 +71,53 @@ public class WeatherSearchManager {
             }
         });
 
+
+        // Adding request to request queue
+        VolleyRequestQueue.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    public static void getForecastResults(final Context context, String location, final ServerForecastCallback callback) {
+
+        String FINAL_URL = context.getString(R.string.BASE_URL) + context.getString(R.string.API_ID) + context.getString(R.string.FORECAST) + location + ".json";
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                FINAL_URL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(final JSONObject response) {
+
+                List<Forecast> forecasts = new ArrayList<>();
+
+
+                try {
+
+                    JSONObject forecast = response.getJSONObject("forecast");
+                    JSONObject txtForecast = forecast.getJSONObject("txt_forecast");
+
+                    JSONArray forecastday = txtForecast.getJSONArray("forecastday");
+
+                    for (int i = 0; i < forecastday.length(); i++) {
+                        forecasts.add(
+                                Forecast.fromJsonObject(
+                                        forecastday.getJSONObject(i))
+                        );
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                callback.onSuccess(forecasts);
+            }
+
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {VolleyLog.d("Volley", "Error: " + error.getMessage());
+
+            }
+        });
 
         // Adding request to request queue
         VolleyRequestQueue.getInstance(context).addToRequestQueue(jsonObjectRequest);
