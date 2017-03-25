@@ -16,8 +16,6 @@ import com.google.android.gms.maps.model.LatLng;
 import io.pk.vatavarana.R;
 import io.pk.vatavarana.service.WeatherDisplayService;
 
-import static io.pk.vatavarana.R.id.mapView;
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -42,7 +40,7 @@ public class PageTwo extends Fragment implements OnMapReadyCallback{
 
 
 
-        mMapView = ((MapView) view.findViewById(mapView));
+        mMapView = ((MapView) view.findViewById(R.id.map_view));
         mMapView.onCreate(savedInstanceState);
         mMapView.onResume();
 

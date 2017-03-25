@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="@dimen/padding_size_3x">
+            android:padding="@dimen/padding_size_6x">
 
             <TextView
                 android:id="@+id/widgetLocation"
@@ -67,8 +67,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginRight="@dimen/margin_size_2x"
-            android:layout_marginTop="@dimen/margin_size_2x" />
+            android:layout_marginRight="@dimen/margin_size_8x"
+            android:layout_marginTop="@dimen/margin_size_8x" />
 
         <TextView
             android:id="@+id/widgetTemperature"

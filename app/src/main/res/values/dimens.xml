@@ -5,6 +5,9 @@
     <dimen name="test_size_display_1x">12sp</dimen>
     <dimen name="test_size_display_2x">16sp</dimen>
     <dimen name="test_size_display_3x">20sp</dimen>
-    <dimen name="margin_size_2x">16dp</dimen>
-    <dimen name="padding_size_3x">12dp</dimen>
+    <dimen name="margin_size_8x">16dp</dimen>
+    <dimen name="padding_size_6x">12dp</dimen>
+    <dimen name="margin_size_x">1sp</dimen>
+    <dimen name="size_x">4dp</dimen>
+    <dimen name="margin_size_2x">4dp</dimen>
 </resources>
