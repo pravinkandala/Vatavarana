@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 
 import io.pk.vatavarana.R;
@@ -20,6 +22,7 @@ import io.pk.vatavarana.model.Forecast;
 import io.pk.vatavarana.network.ServerForecastCallback;
 import io.pk.vatavarana.network.WeatherSearchManager;
 import io.pk.vatavarana.service.LocationService;
+import io.pk.vatavarana.service.WeatherDisplayService;
 import io.pk.vatavarana.util.SnackbarUtils;
 
 /**
@@ -77,6 +80,11 @@ public class PageOne extends Fragment {
                     mAdapter = new ForecastAdapter(mContext, forecasts);
                     mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
                     mRecyclerView.setAdapter(mAdapter);
+
+                    WeatherDisplayService weather = new  WeatherDisplayService();
+                    weather.displayWeatherInfo(mContext,new LatLng(mLocation.getLatitude(),mLocation.getLongitude()));
+
+
 
                 }
             });
