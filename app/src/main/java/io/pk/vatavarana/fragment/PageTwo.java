@@ -11,7 +11,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Marker;
 
 import io.pk.vatavarana.R;
 import io.pk.vatavarana.service.WeatherDisplayService;
@@ -25,6 +28,7 @@ public class PageTwo extends Fragment implements OnMapReadyCallback{
 
     GoogleMap mMap;
     MapView mMapView;
+    Marker mMarker;
 
     public PageTwo() {
         // Required empty public constructor
@@ -73,8 +77,25 @@ public class PageTwo extends Fragment implements OnMapReadyCallback{
                 WeatherDisplayService weather = new  WeatherDisplayService();
 
                 weather.displayWeatherInfoDialog(view.getContext(),latLng);
+
+                addMarker(latLng);
             }
         });
+    }
+
+    void addMarker(LatLng latLng){
+        if(mMap!=null) {
+
+            mMap.clear();
+
+            mMarker = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(latLng.latitude, latLng.longitude))
+                    .title("Feature")
+                    .draggable(true)
+                    .snippet("Not Available")
+                    .icon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
+        }
     }
 
     @Override
