@@ -29,13 +29,21 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/my_recycler_view"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/collapsing_toolbar_layout"
-                android:scrollbars="vertical"
-                app:layout_collapseMode="pin" />
+                android:layout_below="@+id/collapsing_toolbar_layout">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/collapsing_toolbar_layout"
+                    android:scrollbars="vertical"
+                    app:layout_collapseMode="pin" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
 
         </RelativeLayout>
 

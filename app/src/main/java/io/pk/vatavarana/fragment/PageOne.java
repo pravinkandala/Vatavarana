@@ -6,6 +6,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class PageOne extends Fragment {
     Context mContext;
     LocationService mLocationService;
     Location mLocation;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     public PageOne() {
         // Required empty public constructor
@@ -55,12 +57,18 @@ public class PageOne extends Fragment {
 
         mLocation = mLocationService.getLocation();
 
-
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
         initList();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initList();
+            }
+        });
 
         return view;
     }
@@ -89,8 +97,12 @@ public class PageOne extends Fragment {
                 }
             });
 
+            mSwipeRefreshLayout.setRefreshing(false);
+
         }else{
             SnackbarUtils.make(view, "Error!", Snackbar.LENGTH_SHORT);
+
+            mSwipeRefreshLayout.setRefreshing(false);
         }
     }
 
