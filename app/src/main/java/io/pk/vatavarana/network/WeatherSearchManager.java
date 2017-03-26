@@ -88,7 +88,6 @@ public class WeatherSearchManager {
 
                 List<Forecast> forecasts = new ArrayList<>();
 
-
                 try {
 
                     JSONObject forecast = response.getJSONObject("forecast");

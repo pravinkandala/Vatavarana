@@ -19,6 +19,7 @@ import java.util.List;
 
 import io.pk.vatavarana.R;
 import io.pk.vatavarana.adapter.ForecastAdapter;
+import io.pk.vatavarana.data.repository.ForecastRepository;
 import io.pk.vatavarana.model.Forecast;
 import io.pk.vatavarana.network.ServerForecastCallback;
 import io.pk.vatavarana.network.WeatherSearchManager;
@@ -38,6 +39,7 @@ public class PageOne extends Fragment {
     LocationService mLocationService;
     Location mLocation;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    private ForecastRepository mForecastRepository;
 
     public PageOne() {
         // Required empty public constructor
@@ -61,8 +63,13 @@ public class PageOne extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
+        //Initializing Repository
+        this.mForecastRepository = new ForecastRepository();
+
+        //Get Initial Data - on Notified - fillCards
         initList();
 
+        //Swipe to refresh
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -84,16 +91,8 @@ public class PageOne extends Fragment {
             WeatherSearchManager.getForecastResults(mContext, mLocation.getLatitude() + "," + mLocation.getLongitude(), new ServerForecastCallback() {
                 @Override
                 public void onSuccess(final List<Forecast> forecasts) {
-
-                    mAdapter = new ForecastAdapter(mContext, forecasts);
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-                    mRecyclerView.setAdapter(mAdapter);
-
-                    WeatherDisplayService weather = new  WeatherDisplayService();
-                    weather.displayWeatherInfo(mContext,new LatLng(mLocation.getLatitude(),mLocation.getLongitude()));
-
-
-
+                    mForecastRepository.addAll(forecasts);
+                    fillCards(mForecastRepository.getAll());
                 }
             });
 
@@ -104,6 +103,28 @@ public class PageOne extends Fragment {
 
             mSwipeRefreshLayout.setRefreshing(false);
         }
+
+
+    }
+
+    /**
+     * Fill data into cards
+     */
+    public void fillCards(final List<Forecast> forecasts) {
+
+        //For Forecast
+        mAdapter = new ForecastAdapter(mContext, forecasts);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        //For Weather Observation
+        WeatherDisplayService weather = new  WeatherDisplayService();
+        weather.displayWeatherInfo(mContext,new LatLng(mLocation.getLatitude(),mLocation.getLongitude()));
+
+
+        //stop refresh progress
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
 

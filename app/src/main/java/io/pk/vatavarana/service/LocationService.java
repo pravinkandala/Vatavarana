@@ -13,15 +13,21 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 
+
+/**
+ * TODO: Needs attention !!
+ * Handle errors properly and stop service
+ */
+
+
 public class LocationService extends Service implements LocationListener {
 
     private final Context context;
+    protected LocationManager locationManager;
     boolean isGPSEnabled = false;
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
-
     Location location;
-    protected LocationManager locationManager;
 
     public LocationService(Context context) {
         this.context = context;
@@ -59,7 +65,7 @@ public class LocationService extends Service implements LocationListener {
                     location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
