@@ -36,7 +36,7 @@ public class WeatherDisplayService {
             public void onSuccess(final CurrentObservation observation) {
 
                 if (observation.getWeather()==null) {
-                    SnackbarUtils.make(view, "No weather station here", Snackbar.LENGTH_SHORT);
+                    SnackbarUtils.make(view, context.getString(R.string.observation_not_found), Snackbar.LENGTH_SHORT);
                 } else {
                     displayContent(view, observation);
                 }

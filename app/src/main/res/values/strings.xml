@@ -17,4 +17,6 @@
     <string name="volley_connectionerror">Cannot connect to Internet...Please check your connection!</string>
     <string name="volley_timeouterror">Connection TimeOut! Please check your internet connection.</string>
     <string name="volley_error">Error!</string>
+    <string name="location_error">Location Error!</string>
+    <string name="temporary_message">Feature Not Available</string>
 </resources>
