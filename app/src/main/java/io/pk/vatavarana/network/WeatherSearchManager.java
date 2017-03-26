@@ -6,7 +6,6 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
@@ -19,6 +18,7 @@ import java.util.List;
 import io.pk.vatavarana.R;
 import io.pk.vatavarana.model.CurrentObservation;
 import io.pk.vatavarana.model.Forecast;
+import io.pk.vatavarana.network.utils.VolleyUtils;
 
 
 //TODO: Needs attention here. IMPORTANT!!!
@@ -32,8 +32,7 @@ public class WeatherSearchManager {
 
         Log.d("API_INFO", finalUrl);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                finalUrl, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, finalUrl, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(final JSONObject response) {
@@ -66,7 +65,9 @@ public class WeatherSearchManager {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("Volley", "Error: " + error.getMessage());
+//                VolleyLog.d("Volley", "Error: " + error.getMessage());
+
+                VolleyUtils.displayVolleyException(error, context);
 
             }
         });
@@ -80,8 +81,7 @@ public class WeatherSearchManager {
 
         String FINAL_URL = context.getString(R.string.BASE_URL) + context.getString(R.string.API_ID) + context.getString(R.string.FORECAST) + location + ".json";
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
-                FINAL_URL, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, FINAL_URL, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(final JSONObject response) {
@@ -94,13 +94,10 @@ public class WeatherSearchManager {
                     JSONObject forecast = response.getJSONObject("forecast");
                     JSONObject txtForecast = forecast.getJSONObject("txt_forecast");
 
-                    JSONArray forecastday = txtForecast.getJSONArray("forecastday");
+                    JSONArray forecastDay = txtForecast.getJSONArray("forecastday");
 
-                    for (int i = 0; i < forecastday.length(); i++) {
-                        forecasts.add(
-                                Forecast.fromJsonObject(
-                                        forecastday.getJSONObject(i))
-                        );
+                    for (int i = 0; i < forecastDay.length(); i++) {
+                        forecasts.add(Forecast.fromJsonObject(forecastDay.getJSONObject(i)));
                     }
 
 
@@ -114,7 +111,11 @@ public class WeatherSearchManager {
         }, new Response.ErrorListener() {
 
             @Override
-            public void onErrorResponse(VolleyError error) {VolleyLog.d("Volley", "Error: " + error.getMessage());
+            public void onErrorResponse(VolleyError error) {
+//                VolleyLog.d("Volley", "Error: " + error.getMessage());
+
+                VolleyUtils.displayVolleyException(error, context);
+
 
             }
         });
