@@ -63,7 +63,7 @@ public class WeatherDisplayService {
 
                 if (observation.getWeather()==null) {
                     view = ((Activity) context).findViewById(android.R.id.content);
-                    SnackbarUtils.make(view, "No weather station here!", Snackbar.LENGTH_SHORT);
+                    SnackbarUtils.make(view, context.getString(R.string.observation_not_found), Snackbar.LENGTH_SHORT);
                 } else {
                     displayContent(view, observation);
                     dialog.show();

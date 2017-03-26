@@ -21,7 +21,7 @@ public class IntroActivity extends MaterialIntroActivity {
         final SlideFragmentBuilder mSlideFragmentBuilder = new SlideFragmentBuilder().backgroundColor(R.color.colorOrange);
         if (Build.VERSION.SDK_INT >= 23)
             mSlideFragmentBuilder.possiblePermissions(new String[]{ android.Manifest.permission.ACCESS_COARSE_LOCATION}).neededPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.INTERNET});
-        final SlideFragment mSlider = mSlideFragmentBuilder.title("Vatavarana").description("Weather application").build();
+        final SlideFragment mSlider = mSlideFragmentBuilder.title(getString(R.string.intro_title)).description(getString(R.string.intro_description)).build();
         addSlide(mSlider, new MessageButtonBehaviour(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +41,7 @@ public class IntroActivity extends MaterialIntroActivity {
 
                 loading.start();
             }
-        },"Continue"));
+        },getString(R.string.intro_button)));
     }
 
 }

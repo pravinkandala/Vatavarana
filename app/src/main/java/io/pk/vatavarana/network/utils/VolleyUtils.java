@@ -13,6 +13,7 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 
+import io.pk.vatavarana.R;
 import io.pk.vatavarana.util.SnackbarUtils;
 
 public class VolleyUtils {
@@ -23,19 +24,19 @@ public class VolleyUtils {
 
         String message;
         if (volleyError instanceof NetworkError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = context.getString(R.string.volley_networkerror);
         } else if (volleyError instanceof ServerError) {
-            message = "The server could not be found. Please try again after some time!!";
+            message = context.getString(R.string.volley_servererror);
         } else if (volleyError instanceof AuthFailureError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = context.getString(R.string.volley_authfailureerror);
         } else if (volleyError instanceof ParseError) {
-            message = "Parsing error! Please try again after some time!!";
+            message = context.getString(R.string.volley_parseerror);
         } else if (volleyError instanceof NoConnectionError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = context.getString(R.string.volley_connectionerror);
         } else if (volleyError instanceof TimeoutError) {
-            message = "Connection TimeOut! Please check your internet connection.";
+            message = context.getString(R.string.volley_timeouterror);
         }else{
-            message = "Error!";
+            message = context.getString(R.string.volley_error);
         }
 
         SnackbarUtils.make(view, message, Snackbar.LENGTH_LONG);

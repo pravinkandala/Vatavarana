@@ -6,4 +6,15 @@
     <string name="BASE_URL">http://api.wunderground.com/api/</string>
     <string name="API_ID">0423958b78e1d1e2</string>
     <string name="FORECAST">/conditions/forecast/alert/q/</string>
+    <string name="intro_button">Continue</string>
+    <string name="intro_title">Vatavarana</string>
+    <string name="intro_description">Weather Forecast Application</string>
+    <string name="observation_not_found">No Weather Station here</string>
+    <string name="volley_networkerror">Cannot connect to Internet...Please check your connection!</string>
+    <string name="volley_servererror">The server could not be found. Please try again after some time!!</string>
+    <string name="volley_authfailureerror">Cannot connect to Internet...Please check your connection!</string>
+    <string name="volley_parseerror">Parsing error! Please try again after some time!!</string>
+    <string name="volley_connectionerror">Cannot connect to Internet...Please check your connection!</string>
+    <string name="volley_timeouterror">Connection TimeOut! Please check your internet connection.</string>
+    <string name="volley_error">Error!</string>
 </resources>

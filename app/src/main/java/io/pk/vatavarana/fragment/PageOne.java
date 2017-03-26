@@ -99,7 +99,7 @@ public class PageOne extends Fragment {
             mSwipeRefreshLayout.setRefreshing(false);
 
         }else{
-            SnackbarUtils.make(view, "Error!", Snackbar.LENGTH_SHORT);
+            SnackbarUtils.make(view, getString(R.string.pageone_location_error), Snackbar.LENGTH_SHORT);
 
             mSwipeRefreshLayout.setRefreshing(false);
         }
